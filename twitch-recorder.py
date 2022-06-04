@@ -24,7 +24,10 @@ class TwitchRecorder:
     def __init__(self):
         # global configuration
         self.ffmpeg_path = config.ffmpeg
-        self.disable_ffmpeg = False
+        if self.ffmpeg_path == "":
+            self.disable_ffmpeg = True
+        else:
+            self.disable_ffmpeg = False
         self.refresh = 0.5
         self.root_path = config.root_path
 
@@ -53,9 +56,9 @@ class TwitchRecorder:
 
     def run(self):
         # path to recorded stream
-        recorded_path = os.path.join(self.root_path, "recorded", self.username)
+        recorded_path = os.path.join(self.root_path, "recorded")
         # path to finished video, errors removed
-        processed_path = os.path.join(self.root_path, "processed", self.username)
+        processed_path = os.path.join(self.root_path, "processed")
 
         # create directory for recordedPath and processedPath if not exist
         if os.path.isdir(recorded_path) is False:
@@ -165,7 +168,7 @@ class TwitchRecorder:
             elif status == TwitchResponseStatus.ONLINE:
                 print(f"{config.username} online, stream recording in session")
 
-                filename = datetime.datetime.now().strftime("%Y-%m-%d") + ".mp4"
+                filename = datetime.datetime.now().strftime("%Y-%m-%d_%H%M") + ".mp4"
 
                 recorded_filename = os.path.join(recorded_path, filename)
                 processed_filename = os.path.join(processed_path, filename)
@@ -190,7 +193,7 @@ class TwitchRecorder:
                     print("skip fixing, file not found")
 
                 print("processing is done, going back to checking...")
-                time.sleep(self.refresh)
+                time.sleep(5)
 
 
 def main(argv):
