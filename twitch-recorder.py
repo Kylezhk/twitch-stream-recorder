@@ -23,7 +23,7 @@ class TwitchResponseStatus(enum.Enum):
 class TwitchRecorder:
     def __init__(self):
         # global configuration
-        self.ffmpeg_path = "ffmpeg"
+        self.ffmpeg_path = config.ffmpeg
         self.disable_ffmpeg = False
         self.refresh = 0.5
         self.root_path = config.root_path
@@ -63,13 +63,13 @@ class TwitchRecorder:
         if os.path.isdir(processed_path) is False:
             os.makedirs(processed_path)
 
-        # make sure the interval to check user availability is not less than 15 seconds
+        # make sure the interval to check user availability is not less than 0.5 seconds
         if self.refresh < 0.5:
             print("check interval should not be lower than 0.5 seconds")
             self.refresh = 0.5
             print("system set check interval to 0.5 seconds")
 
-        # fix videos from previous recording session
+        # fix videordins from previous recog session
         try:
             video_list = [
                 f
@@ -86,10 +86,7 @@ class TwitchRecorder:
             print(e)
 
         print(
-            f"checking for {self.username} every {self.refresh} seconds, recording with {self.quality} quality",
-            self.username,
-            self.refresh,
-            self.quality,
+            f"checking for {self.username} every {self.refresh} seconds, recording with {self.quality} quality"
         )
         self.loop_check(recorded_path, processed_path)
 
@@ -159,35 +156,16 @@ class TwitchRecorder:
                 time.sleep(10)
             elif status == TwitchResponseStatus.OFFLINE:
                 print(
-                    f"{config.username} currently offline, checking again in 0.5 seconds",
-                    self.username,
-                    self.refresh,
+                    f"{config.username} currently offline, checking again in 0.5 seconds"
                 )
                 time.sleep(self.refresh)
             elif status == TwitchResponseStatus.UNAUTHORIZED:
                 print("unauthorized, will attempt to log back in immediately")
                 self.access_token = self.fetch_access_token()
             elif status == TwitchResponseStatus.ONLINE:
-                print(
-                    f"{config.username} online, stream recording in session",
-                    self.username,
-                )
+                print(f"{config.username} online, stream recording in session")
 
-                channels = info["data"]
-                channel = next(iter(channels), None)
-                filename = (
-                    self.username
-                    + " - "
-                    + datetime.datetime.now().strftime("%Y-%m-%d")
-                    + " - "
-                    + channel.get("title")
-                    + ".mp4"
-                )
-
-                # clean filename from unnecessary characters
-                filename = "".join(
-                    x for x in filename if x.isalnum() or x in [" ", "-", "_", "."]
-                )
+                filename = datetime.datetime.now().strftime("%Y-%m-%d") + ".mp4"
 
                 recorded_filename = os.path.join(recorded_path, filename)
                 processed_filename = os.path.join(processed_path, filename)
