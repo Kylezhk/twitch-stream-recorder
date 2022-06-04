@@ -1,7 +1,6 @@
 import datetime
 import enum
 import getopt
-import logging
 import os
 import subprocess
 import sys
@@ -66,9 +65,9 @@ class TwitchRecorder:
 
         # make sure the interval to check user availability is not less than 15 seconds
         if self.refresh < 0.5:
-            logging.warning("check interval should not be lower than 0.5 seconds")
+            print("check interval should not be lower than 0.5 seconds")
             self.refresh = 0.5
-            logging.info("system set check interval to 0.5 seconds")
+            print("system set check interval to 0.5 seconds")
 
         # fix videos from previous recording session
         try:
@@ -78,16 +77,16 @@ class TwitchRecorder:
                 if os.path.isfile(os.path.join(recorded_path, f))
             ]
             if len(video_list) > 0:
-                logging.info("processing previously recorded files")
+                print("processing previously recorded files")
             for f in video_list:
                 recorded_filename = os.path.join(recorded_path, f)
                 processed_filename = os.path.join(processed_path, f)
                 self.process_recorded_file(recorded_filename, processed_filename)
         except Exception as e:
-            logging.error(e)
+            print(e)
 
-        logging.info(
-            "checking for %s every %s seconds, recording with %s quality",
+        print(
+            f"checking for {self.username} every {self.refresh} seconds, recording with {self.quality} quality",
             self.username,
             self.refresh,
             self.quality,
@@ -96,10 +95,10 @@ class TwitchRecorder:
 
     def process_recorded_file(self, recorded_filename, processed_filename):
         if self.disable_ffmpeg:
-            logging.info("moving: %s", recorded_filename)
+            print("moving: ", recorded_filename)
             shutil.move(recorded_filename, processed_filename)
         else:
-            logging.info("fixing %s", recorded_filename)
+            print("fixing: ", recorded_filename)
             self.ffmpeg_copy_and_fix_errors(recorded_filename, processed_filename)
 
     def ffmpeg_copy_and_fix_errors(self, recorded_filename, processed_filename):
@@ -119,7 +118,7 @@ class TwitchRecorder:
             )
             os.remove(recorded_filename)
         except Exception as e:
-            logging.error(e)
+            print(e)
 
     def check_user(self):
         info = None
@@ -150,26 +149,29 @@ class TwitchRecorder:
         while True:
             status, info = self.check_user()
             if status == TwitchResponseStatus.NOT_FOUND:
-                logging.error("username not found, invalid username or typo")
+                print("username not found, invalid username or typo")
                 time.sleep(self.refresh)
             elif status == TwitchResponseStatus.ERROR:
-                logging.error(
-                    "%s unexpected error. will try again in 10s",
+                print(
+                    "unexpected error. will try again in 10s",
                     datetime.datetime.now().strftime("%Hh%Mm%Ss"),
                 )
                 time.sleep(10)
             elif status == TwitchResponseStatus.OFFLINE:
-                logging.info(
-                    "%s currently offline, checking again in %s seconds",
+                print(
+                    f"{config.username} currently offline, checking again in 0.5 seconds",
                     self.username,
                     self.refresh,
                 )
                 time.sleep(self.refresh)
             elif status == TwitchResponseStatus.UNAUTHORIZED:
-                logging.info("unauthorized, will attempt to log back in immediately")
+                print("unauthorized, will attempt to log back in immediately")
                 self.access_token = self.fetch_access_token()
             elif status == TwitchResponseStatus.ONLINE:
-                logging.info("%s online, stream recording in session", self.username)
+                print(
+                    f"{config.username} online, stream recording in session",
+                    self.username,
+                )
 
                 channels = info["data"]
                 channel = next(iter(channels), None)
@@ -203,21 +205,19 @@ class TwitchRecorder:
                     shell=True,
                 )
 
-                logging.info("recording stream is done, processing video file")
+                print("recording stream is done, processing video file")
                 if os.path.exists(recorded_filename) is True:
                     self.process_recorded_file(recorded_filename, processed_filename)
                 else:
-                    logging.info("skip fixing, file not found")
+                    print("skip fixing, file not found")
 
-                logging.info("processing is done, going back to checking...")
+                print("processing is done, going back to checking...")
                 time.sleep(self.refresh)
 
 
 def main(argv):
     twitch_recorder = TwitchRecorder()
     usage_message = "twitch-recorder.py -u <username> -q <quality>"
-    logging.basicConfig(filename="twitch-recorder.log", level=logging.INFO)
-    logging.getLogger().addHandler(logging.StreamHandler())
 
     try:
         opts, args = getopt.getopt(
@@ -237,14 +237,10 @@ def main(argv):
         elif opt in ("-q", "--quality"):
             twitch_recorder.quality = arg
         elif opt in ("-l", "--log", "--logging"):
-            logging_level = getattr(logging, arg.upper(), None)
-            if not isinstance(logging_level, int):
-                raise ValueError("invalid log level: %s" % logging_level)
-            logging.basicConfig(level=logging_level)
-            logging.info("logging configured to %s", arg.upper())
+            pass
         elif opt == "--disable-ffmpeg":
             twitch_recorder.disable_ffmpeg = True
-            logging.info("ffmpeg disabled")
+            print("ffmpeg disabled")
 
     twitch_recorder.run()
 
