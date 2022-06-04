@@ -78,3 +78,6 @@ config.py
 /recorded
 /processed
 __pycache__
+/dist 
+/build 
+twitch-recorder.spec

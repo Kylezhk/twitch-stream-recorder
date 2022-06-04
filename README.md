@@ -10,3 +10,4 @@ This script allows you to record twitch streams live to .mp4 files.
 - fixed shell error
 - namin as target streammer
 
+if there any bug, discord find me thanks Ky1ez#5989
