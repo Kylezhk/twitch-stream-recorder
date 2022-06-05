@@ -29,3 +29,5 @@ This is fork by [ancalentari](https://github.com/ancalentari/twitch-stream-recor
 
 
 If there any bugs, please find me Ky1ez#5989 through the Discord 
+
+[![namin banner](banner.jpg)](https://marpple.shop/en/namin?page=0)
