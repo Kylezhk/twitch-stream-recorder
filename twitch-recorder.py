@@ -177,6 +177,8 @@ class TwitchRecorder:
                 subprocess.call(
                     [
                         "streamlink.exe",
+                        "--hls-playlist-reload-attempts",
+                        "10",
                         "--twitch-disable-hosting",
                         "--twitch-low-latency",
                         "--twitch-disable-ads",
