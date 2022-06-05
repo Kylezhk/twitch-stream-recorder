@@ -28,7 +28,7 @@ class TwitchRecorder:
             self.disable_ffmpeg = True
         else:
             self.disable_ffmpeg = False
-        self.refresh = 0.5
+        self.refresh = 1
         self.root_path = config.root_path
 
         # user configuration
@@ -49,7 +49,7 @@ class TwitchRecorder:
         self.access_token = self.fetch_access_token()
 
     def fetch_access_token(self):
-        token_response = requests.post(self.token_url, timeout=0.5)
+        token_response = requests.post(self.token_url, timeout=1)
         token_response.raise_for_status()
         token = token_response.json()
         return token["access_token"]
@@ -66,11 +66,11 @@ class TwitchRecorder:
         if os.path.isdir(processed_path) is False:
             os.makedirs(processed_path)
 
-        # make sure the interval to check user availability is not less than 0.5 seconds
-        if self.refresh < 0.5:
-            print("check interval should not be lower than 0.5 seconds")
-            self.refresh = 0.5
-            print("system set check interval to 0.5 seconds")
+        # make sure the interval to check user availability is not less than 1 seconds
+        if self.refresh < 1:
+            print("check interval should not be lower than 1 seconds")
+            self.refresh = 1
+            print("system set check interval to 1 seconds")
 
         # fix videordins from previous recog session
         try:
@@ -159,7 +159,7 @@ class TwitchRecorder:
                 time.sleep(10)
             elif status == TwitchResponseStatus.OFFLINE:
                 print(
-                    f"{config.username} currently offline, checking again in 0.5 seconds"
+                    f"{config.username} currently offline, checking again in 1 seconds"
                 )
                 time.sleep(self.refresh)
             elif status == TwitchResponseStatus.UNAUTHORIZED:
