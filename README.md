@@ -1,14 +1,19 @@
 # Ky's Twitch Stream Recorder
-This script allows you to record twitch streams live to .mp4 files.
+This exe allows you to record twitch streams live to .mp4 files.
+This is fork by [ancalentari](https://github.com/ancalentari/twitch-stream-recorder) twitch-stream-recorder
 ## Requirements
 - [streamlink](https://streamlink.github.io/) (ffmpeg need to be installed together)
+- Brain
 
 ## Step
-0) 安裝streamlink (全部按下一步就好了)
-1) 下載[程式](https://github.com/Kylezhk/twitch-stream-recorder/releases/download/v100/ky1-twitch-recorder.exe) (廢話)
-2) 找一個/開一個空白資料夾
-3) 把程式放進去
-4) 開起來 (第一次會自動生成processed資料夾跟recorded資料夾)
+0) 安裝Streamlink (全部按下一步就好了)
+
+1) 請確定 `C:\Program Files\Streamlink\ffmpeg\` 有 ffmpeg.exe (安裝streamlink就會有了)
+
+2) 下載[程式](https://github.com/Kylezhk/twitch-stream-recorder/releases/download/v100/ky1-twitch-recorder.exe) (廢話)
+3) 找一個/開一個空白資料夾
+4) 把程式放進去
+5) 開起來! (第一次會自動生成processed資料夾跟recorded資料夾)
 
 金主播下播後.mp4檔會在processed資料夾出現
 
@@ -23,4 +28,4 @@ This script allows you to record twitch streams live to .mp4 files.
 - Namin as target streammer
 
 
-If there any bugs, please find me Ky1ez#5989 through the Discord
+If there any bugs, please find me Ky1ez#5989 through the Discord 
