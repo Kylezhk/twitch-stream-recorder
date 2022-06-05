@@ -7,9 +7,7 @@ This is fork by [ancalentari](https://github.com/ancalentari/twitch-stream-recor
 
 ## Step
 0) 安裝Streamlink (全部按下一步就好了)
-
 1) 請確定 `C:\Program Files\Streamlink\ffmpeg\` 有 ffmpeg.exe (安裝streamlink就會有了)
-
 2) 下載[程式](https://github.com/Kylezhk/twitch-stream-recorder/releases/download/v100/ky1-twitch-recorder.exe) (廢話)
 3) 找一個/開一個空白資料夾
 4) 把程式放進去
@@ -22,13 +20,15 @@ This is fork by [ancalentari](https://github.com/ancalentari/twitch-stream-recor
 注: 這是獨立程式，可以跟twitchlink，twitchleecher一起開
 
 ## Changed
-- Only windows
+- Only Windows OS
 - No Log file
-- 0.5 sec refresh rate
+- 1 sec refresh time 
 - Date + time as file name
 - Fixed shell error
-- Namin as target streammer
-
+- Namin1004 as target streammer
+- Enable low-latency
+- No longer record when hosing
+- Reload attempts increased to 10 times
 
 If there any bugs, please find me Ky1ez#5989 through the Discord 
 
