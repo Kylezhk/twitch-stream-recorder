@@ -8,7 +8,7 @@ This is fork by [ancalentari](https://github.com/ancalentari/twitch-stream-recor
 ## Step
 0) 安裝Streamlink (全部按下一步就好了)
 1) 請確定 `C:\Program Files\Streamlink\ffmpeg\` 有 ffmpeg.exe (安裝streamlink就會有了)
-2) 下載[程式](https://github.com/Kylezhk/twitch-stream-recorder/releases/download/v100/ky1-twitch-recorder.exe) (廢話)
+2) 下載[程式](https://github.com/Kylezhk/twitch-stream-recorder/releases/download/V101/ky1-twitch-recorder.exe) (廢話)
 3) 找一個/開一個空白資料夾
 4) 把程式放進去
 5) 開起來! (第一次會自動生成processed資料夾跟recorded資料夾)
