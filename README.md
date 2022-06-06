@@ -15,9 +15,11 @@ This is fork by [ancalentari](https://github.com/ancalentari/twitch-stream-recor
 
 金主播下播後然後等程式回到`namin1004 currently offline, checking again in 0.5 seconds`, .mp4檔會在processed資料夾出現
 
-注: 當金主播下播後程式會繼續運行，如果不想佔用網絡請關閉程式
+>注: 當金主播下播後程式會繼續運行，如果不想佔用網絡請關閉程式
 
-注: 這是獨立程式，可以跟twitchlink，twitchleecher一起開
+>注: 這是獨立程式，可以跟twitchlink，twitchleecher一起開
+
+>注: 正常情況下，這個程式下載來的VOD是沒有開始的20秒，所以有用info的請小心
 
 ## Changed
 - Only Windows OS
