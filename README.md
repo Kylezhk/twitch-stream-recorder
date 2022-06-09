@@ -8,7 +8,7 @@ This is fork by [ancalentari](https://github.com/ancalentari/twitch-stream-recor
 ## Step
 0) 安裝Streamlink (全部按下一步就好了)
 1) 請確定 `C:\Program Files\Streamlink\ffmpeg\` 有 ffmpeg.exe (安裝streamlink就會有了)
-2) 下載[程式](https://github.com/Kylezhk/twitch-stream-recorder/releases/download/V101/ky1-twitch-recorder.exe) (廢話)
+2) 下載[程式](https://github.com/Kylezhk/twitch-stream-recorder/releases/download/v200/ky1-twitch-recorder-v200.exe) (廢話)
 3) 找一個/開一個空白資料夾
 4) 把程式放進去
 5) 開起來! (第一次會自動生成processed資料夾跟recorded資料夾)
@@ -25,7 +25,7 @@ This is fork by [ancalentari](https://github.com/ancalentari/twitch-stream-recor
 ## Changed
 - Only Windows OS
 - No Log file
-- Refresh time = ASAP
+- Refresh time around a second
 - Date + time as file name
 - Fixed shell error
 - Namin1004 as target streammer
@@ -34,7 +34,7 @@ This is fork by [ancalentari](https://github.com/ancalentari/twitch-stream-recor
 - Reload attempts increased to 10 times
 - Applied Twitch authentication
 - Delete args in main() for exe purpose only
-- Checking method related to Streamlink rather than  Twitch API
+- Checking method related to Streamlink rather than Twitch API
 
 If there any bugs, please find me Ky1ez#5989 through the Discord 
 
