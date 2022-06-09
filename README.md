@@ -12,25 +12,29 @@ This is fork by [ancalentari](https://github.com/ancalentari/twitch-stream-recor
 3) 找一個/開一個空白資料夾
 4) 把程式放進去
 5) 開起來! (第一次會自動生成processed資料夾跟recorded資料夾)
+6) 程式會持續顯示出`error: No playable streams found on this URL: twitch.tv/namin1004`來稽查namin有沒有開播
 
-金主播下播後然後等程式回到`namin1004 currently offline, checking again in 0.5 seconds`, .mp4檔會在processed資料夾出現
+金主播下播後然後等程式回到`error: No playable streams found on this URL: twitch.tv/namin1004`, .mp4檔會在processed資料夾出現
 
 >注: 當金主播下播後程式會繼續運行，如果不想佔用網絡請關閉程式
 
 >注: 這是獨立程式，可以跟twitchlink，twitchleecher一起開
 
->注: 正常情況下，這個程式下載來的VOD是沒有開始的20秒，所以有用info的請小心
+>~~注: 正常情況下，這個程式下載來的VOD是沒有開始的20秒，所以有用info的請小心~~ 未知
 
 ## Changed
 - Only Windows OS
 - No Log file
-- 1 sec refresh time 
+- Refresh time = ASAP
 - Date + time as file name
 - Fixed shell error
 - Namin1004 as target streammer
 - Enable low-latency
 - No longer record when hosing
 - Reload attempts increased to 10 times
+- Applied Twitch authentication
+- Delete args in main() for exe purpose only
+- Checking method related to Streamlink rather than  Twitch API
 
 If there any bugs, please find me Ky1ez#5989 through the Discord 
 
