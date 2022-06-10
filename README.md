@@ -6,7 +6,7 @@ This exe allows you to record twitch streams live to .mp4 files.
 - Your Love to Namin
 
 ## Step
-0) 安裝[Streamlink](https://streamlink.github.io/)  (最新版本就最好，全部按下一步就好了)
+0) 安裝[Streamlink](https://streamlink.github.io/install.html)  (最新版本就最好，全部按下一步就好了)
 1) 請確定 `C:\Program Files\Streamlink\ffmpeg\` 有 ffmpeg.exe (安裝streamlink就會有了)
 2) 下載我弄的[程式](https://github.com/Kylezhk/twitch-stream-recorder/releases/download/v200/ky1-twitch-recorder-v200.exe) (廢話)
 3) 找一個/開一個空白資料夾
