@@ -12,11 +12,12 @@ This is fork by [ancalentari](https://github.com/ancalentari/twitch-stream-recor
 3) 找一個/開一個空白資料夾
 4) 把程式放進去
 5) 開起來! (第一次會自動生成processed資料夾跟recorded資料夾)
-6) 程式會持續顯示出`error: No playable streams found on this URL: twitch.tv/namin1004`來稽查namin有沒有開播
+
+程式會持續顯示出`error: No playable streams found on this URL: twitch.tv/namin1004`來稽查namin有沒有開播
 
 金主播下播後然後等程式回到`error: No playable streams found on this URL: twitch.tv/namin1004`, .mp4檔會在processed資料夾出現
 
->注: 當金主播下播後程式會繼續運行，如果不想佔用網絡請關閉程式
+>注: 當金主播下播後程式會繼續運行24/7，如果不想佔用網絡請關閉程式
 
 >注: 這是獨立程式，可以跟twitchlink，twitchleecher一起開
 
@@ -31,7 +32,7 @@ This is fork by [ancalentari](https://github.com/ancalentari/twitch-stream-recor
 - Namin1004 as target streammer
 - Enable low-latency
 - No longer record when hosing
-- Reload attempts increased to 10 times
+- Reload attempts increased to 20 times
 - Applied Twitch authentication
 - Delete args in main() for exe purpose only
 - Checking method related to Streamlink rather than Twitch API

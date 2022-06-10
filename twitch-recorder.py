@@ -1,7 +1,6 @@
 import datetime
 import os
 import subprocess
-import sys
 import shutil
 import requests
 import config
@@ -108,7 +107,7 @@ class TwitchRecorder:
                 [
                     "streamlink.exe",
                     "--hls-playlist-reload-attempts",
-                    "10",
+                    "20",
                     "--quiet",
                     f"--twitch-api-header=Authentication=OAuth {self.access_token}",
                     "--twitch-disable-hosting",
@@ -125,10 +124,10 @@ class TwitchRecorder:
                 self.process_recorded_file(recorded_filename, processed_filename)
 
 
-def main(argv):
+def main():
     twitch_recorder = TwitchRecorder()
     twitch_recorder.run()
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main()
