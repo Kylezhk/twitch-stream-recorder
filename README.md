@@ -11,7 +11,7 @@ This exe allows you to record twitch streams live to .mp4 files.
 2) 下載我弄的[程式](https://github.com/Kylezhk/twitch-stream-recorder/releases/download/v200/ky1-twitch-recorder-v201.exe) (廢話)
 3) 找一個/開一個空白資料夾
 4) 把程式放進去
-5) - 請到這個[網站](https://twitchapps.com/tmi/)拿你自己的Token (按Connect然後複製那段字) (這Token = 無廣告下載VOD) 
+5) 請到這個[網站](https://twitchapps.com/tmi/)拿你自己的Token (按Connect然後複製那段字) (這Token = 無廣告下載VOD) 
 >如果不懂或者擔心這個網站的安全，可以跳過步驟5。~~沒Token也好像沒有廣告~~ 待驗證
 6) 開起來！然後貼上你剛剛複製的Token，沒有Token的話就直接按Enter就好了 (第一次會自動生成processed資料夾跟recorded資料夾)
 >程式第一句會像`Your token:oauth:1234565ep62w5yyh108d52juqq0euul`
