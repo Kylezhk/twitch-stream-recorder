@@ -2,7 +2,6 @@ import datetime
 import os
 import subprocess
 import shutil
-import requests
 import config
 
 
@@ -21,24 +20,15 @@ class TwitchRecorder:
         self.quality = "best"
 
         # twitch configuration
-        self.client_id = config.client_id
-        self.client_secret = config.client_secret
-        self.token_url = (
-            "https://id.twitch.tv/oauth2/token?client_id="
-            + self.client_id
-            + "&client_secret="
-            + self.client_secret
-            + "&grant_type=client_credentials"
-        )
-        self.access_token = self.fetch_access_token()
+        self.access_token = ""
 
-    def fetch_access_token(self):
-        token_response = requests.post(self.token_url, timeout=1)
-        token_response.raise_for_status()
-        token = token_response.json()
-        return token["access_token"]
+    def run(self, token):
+        # set token
+        try:
+            self.access_token = token.split(":")[1]
+        except:
+            pass
 
-    def run(self):
         # path to recorded stream
         recorded_path = os.path.join(self.root_path, "recorded")
         # path to finished video, errors removed
@@ -101,33 +91,50 @@ class TwitchRecorder:
             filename = datetime.datetime.now().strftime("%Y-%m-%d_%H%M") + ".mp4"
             recorded_filename = os.path.join(recorded_path, filename)
             processed_filename = os.path.join(processed_path, filename)
-
-            # start streamlink process
-            subprocess.call(
-                [
-                    "streamlink.exe",
-                    "--hls-playlist-reload-attempts",
-                    "20",
-                    "--quiet",
-                    f"--twitch-api-header=Authentication=OAuth {self.access_token}",
-                    "--twitch-disable-hosting",
-                    "--twitch-low-latency",
-                    "twitch.tv/" + self.username,
-                    self.quality,
-                    "-o",
-                    recorded_filename,
-                ],
-                shell=True,
-            )
+            if self.access_token != "":
+                # start streamlink process
+                subprocess.call(
+                    [
+                        "streamlink.exe",
+                        "--hls-playlist-reload-attempts",
+                        "20",
+                        "--quiet",
+                        f"--twitch-api-header=Authentication=OAuth {self.access_token}",
+                        "--twitch-disable-hosting",
+                        "--twitch-low-latency",
+                        "twitch.tv/" + self.username,
+                        self.quality,
+                        "-o",
+                        recorded_filename,
+                    ],
+                    shell=True,
+                )
+            else:
+                subprocess.call(
+                    [
+                        "streamlink.exe",
+                        "--hls-playlist-reload-attempts",
+                        "20",
+                        "--quiet",
+                        "--twitch-disable-hosting",
+                        "--twitch-low-latency",
+                        "twitch.tv/" + self.username,
+                        self.quality,
+                        "-o",
+                        recorded_filename,
+                    ],
+                    shell=True,
+                )
 
             if os.path.exists(recorded_filename) is True:
                 self.process_recorded_file(recorded_filename, processed_filename)
 
 
-def main():
+def main(token):
     twitch_recorder = TwitchRecorder()
-    twitch_recorder.run()
+    twitch_recorder.run(token)
 
 
 if __name__ == "__main__":
-    main()
+    token = input("Your token:")
+    main(token)
