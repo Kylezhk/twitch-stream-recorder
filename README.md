@@ -36,7 +36,7 @@ This exe allows you to record twitch streams live to .mp4 files.
 - Enable low-latency
 - No longer record when hosing
 - Reload attempts increased to 20 times
-- Applied Twitch authentication
+- Applied Twitch authentication typed by user 
 - Delete args in main() for exe purpose only
 - Checking method change to Streamlink rather than using Twitch API
 
