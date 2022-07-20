@@ -1,8 +1,11 @@
 import datetime
+import glob
 import os
 import subprocess
 import shutil
+import time
 import config
+from threading import Thread
 
 
 class TwitchRecorder:
@@ -16,7 +19,9 @@ class TwitchRecorder:
         self.root_path = config.root_path
 
         # user configuration
-        self.username = config.username
+        # self.username = config.username
+
+        self.username = "namin1004"
         self.quality = "best"
 
         # twitch configuration
@@ -97,7 +102,7 @@ class TwitchRecorder:
                     [
                         "streamlink.exe",
                         "--hls-playlist-reload-attempts",
-                        "20",
+                        "1",
                         "--quiet",
                         f"--twitch-api-header=Authentication=OAuth {self.access_token}",
                         "--twitch-disable-hosting",
@@ -114,7 +119,7 @@ class TwitchRecorder:
                     [
                         "streamlink.exe",
                         "--hls-playlist-reload-attempts",
-                        "20",
+                        "1",
                         "--quiet",
                         "--twitch-disable-hosting",
                         "--twitch-low-latency",
@@ -126,13 +131,50 @@ class TwitchRecorder:
                     shell=True,
                 )
 
-            if os.path.exists(recorded_filename) is True:
-                self.process_recorded_file(recorded_filename, processed_filename)
+
+def loop_check_ffmepg():
+    while True:
+        mp4List = glob.glob("recorded/*.mp4")
+        if mp4List:
+            for mp4 in mp4List:
+                file_name = os.path.basename(mp4)
+                ffmpeg(mp4, f"./processed/{file_name}")
+
+
+def ffmpeg(recorded_filename, processed_filename):
+    try:
+        subprocess.call(
+            [
+                config.ffmpeg,
+                "-y",
+                "-nostdin",
+                "-err_detect",
+                "ignore_err",
+                "-i",
+                recorded_filename,
+                "-c",
+                "copy",
+                processed_filename,
+            ],
+            shell=True,
+        )
+
+        os.remove(recorded_filename)
+    except Exception as e:
+        print(e)
+        time.sleep(10)
 
 
 def main(token):
-    twitch_recorder = TwitchRecorder()
-    twitch_recorder.run(token)
+    try:
+        twitch_recorder = TwitchRecorder()
+        t1 = Thread(target=loop_check_ffmepg)
+        t2 = Thread(target=twitch_recorder.run, args=(token,))
+
+        t1.start()
+        t2.start()
+    finally:
+        print("exiting")
 
 
 if __name__ == "__main__":

@@ -82,3 +82,4 @@ __pycache__
 /build 
 twitch-recorder.spec
 twitch-recorder.exe
+test.py
