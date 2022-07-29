@@ -80,6 +80,6 @@ config.py
 __pycache__
 /dist 
 /build 
-twitch-recorder.spec
+*.spec
 twitch-recorder.exe
-test.py
+old.py
