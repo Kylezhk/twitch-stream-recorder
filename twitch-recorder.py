@@ -18,7 +18,7 @@ def loop_streamlink(token, streamer):
                     [
                         "streamlink.exe",
                         "--hls-timeout",
-                        "5",
+                        "10",
                         "--quiet",
                         "--twitch-disable-hosting",
                         "--twitch-low-latency",
@@ -34,7 +34,7 @@ def loop_streamlink(token, streamer):
                     [
                         "streamlink.exe",
                         "--hls-timeout",
-                        "5",
+                        "10",
                         "--quiet",
                         "--twitch-disable-hosting",
                         "--twitch-low-latency",
@@ -50,15 +50,16 @@ def loop_streamlink(token, streamer):
 
 
 def loop_ffmpeg(streamer):
+    sleep_time = 5
     while True:
         try:
             subprocess.check_output(["streamlink", "twitch.tv/" + streamer])
-            time.sleep(1)
+            time.sleep(sleep_time)
             pass
         except:
             recordedFolder = glob("recorded/*.mp4")
             if recordedFolder == []:
-                time.sleep(1)
+                time.sleep(sleep_time)
                 pass
             else:
                 for r in recordedFolder:
@@ -78,7 +79,7 @@ def loop_ffmpeg(streamer):
                     try:
                         os.remove(r)
                     except PermissionError:
-                        time.sleep(1)
+                        time.sleep(sleep_time)
                         pass
 
 
