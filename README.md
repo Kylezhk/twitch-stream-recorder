@@ -18,20 +18,18 @@ This exe allows you to record twitch streams live to .mp4 files.
 
 4) 把程式放進去
 
-5) 請到這個[網站](https://twitchapps.com/tmi/)拿你自己的Token (按Connect然後複製那段字) (這Token = 無廣告下載VOD) 
->注: 如果不懂或者擔心這個網站的安全，可以跳過步驟5。~~沒Token也好像沒有廣告~~ 待驗證
+5) 請到這個[網站](https://twitchapps.com/tmi/)拿你自己的Token (按Connect然後複製那段字) ~~沒Token也好像沒有廣告~~ 待驗證
+>注: 如果不懂或者擔心這個網站的安全，可以跳過步驟5。
 
 6) 開起來！程式會先問你要不要選其他的streamer, 如果想下載金主播的話就直接按Enter鍵吧
 
 >步驟 6) 例子: `Enter streamer: hellaya1111`
 
->注: 第一次會自動生成processed資料夾跟recorded資料夾
-
 7) 然後程式會問你Token, 你可以複製並貼上你剛剛在5)的步驟Token，沒有Token的話就直接按Enter鍵就好了
 
 >步驟 7) 例子: `Your token: oauth:1234565ep62w5yyh108d52juqq0euul`
 
-
+>注: 第一次會自動生成processed資料夾跟recorded資料夾
 
 程式會持續顯示出`namin1004 doesn't streaming now`來稽查namin有沒有開播
 

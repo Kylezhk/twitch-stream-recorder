@@ -50,7 +50,7 @@ def loop_streamlink(token, streamer):
 
 
 def loop_ffmpeg(streamer):
-    sleep_time = 5
+    sleep_time = 10
     while True:
         try:
             subprocess.check_output(["streamlink", "twitch.tv/" + streamer])
@@ -90,11 +90,11 @@ def main():
         os.makedirs("processed\\")
 
     print(
-        "Defualt streamer is namin1004, if you want to change, please input another streamer name. Otherise, press enter to continue."
+        "The default streamer is namin1004, if you want to change it please input another streamer name. Otherwise, press Enter to continue.\n \n默認直播主是 namin1004，如果要更改它，請輸入另一個直播主的名稱。否則，按 Enter 繼續"
     )
     streamer = str(input("Enter streamer: ") or "namin1004")
     clear()
-    token = input("Your token: ")
+    token = input("Your token 輸入Token (覺得麻煩的話可以不用輸入): ")
     clear()
     Process(
         target=loop_streamlink,
