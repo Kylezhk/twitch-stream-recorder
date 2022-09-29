@@ -75,8 +75,7 @@ fabric.properties
 venv
 config.py
 
-/recorded
-/processed
+/downloading
 __pycache__
 /dist 
 /build 

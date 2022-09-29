@@ -12,7 +12,7 @@ This exe allows you to record twitch streams live to .mp4 files.
 
 1) 請確定 `C:\Program Files\Streamlink\ffmpeg\` 有 ffmpeg.exe (正常來說安裝streamlink就會有了)
 
-2) 下載我弄的[程式](https://github.com/Kylezhk/twitch-stream-recorder/releases/download/v300/twitch-recorder-v300.exe) (廢話)
+2) 下載我弄的[程式](https://github.com/Kylezhk/twitch-stream-recorder/releases/download/v301/twitch-recorder-v301.exe) (廢話)
 
 3) 找一個/開一個空白資料夾
 
@@ -29,7 +29,7 @@ This exe allows you to record twitch streams live to .mp4 files.
 
 >步驟 7) 例子: `Your token: oauth:1234565ep62w5yyh108d52juqq0euul`
 
->注: 第一次會自動生成processed資料夾跟recorded資料夾
+>注: 第一次會自動生成`processing`資料夾
 
 程式會持續顯示出`namin1004 doesn't streaming now`來稽查namin有沒有開播
 

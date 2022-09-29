@@ -25,7 +25,7 @@ def loop_streamlink(token, streamer):
                         "twitch.tv/" + streamer,
                         "best",
                         "-o",
-                        "recorded/" + current_time + ".mp4",
+                        "downloading/" + current_time + ".mp4",
                     ],
                 )
             else:
@@ -42,11 +42,11 @@ def loop_streamlink(token, streamer):
                         "twitch.tv/" + streamer,
                         "best",
                         "-o",
-                        "recorded/" + current_time + ".mp4",
+                        "downloading/" + current_time + ".mp4",
                     ],
                 )
         except subprocess.CalledProcessError:
-            print(f"{streamer} doesn't streaming now")
+            print(f"{streamer} doesn't streaming now. {streamer} 沒有開直播")
 
 
 def loop_ffmpeg(streamer):
@@ -57,12 +57,12 @@ def loop_ffmpeg(streamer):
             time.sleep(sleep_time)
             pass
         except:
-            recordedFolder = glob("recorded/*.mp4")
-            if recordedFolder == []:
+            downloadingFolder = glob("downloading/*.mp4")
+            if downloadingFolder == []:
                 time.sleep(sleep_time)
                 pass
             else:
-                for r in recordedFolder:
+                for r in downloadingFolder:
                     subprocess.call(
                         [
                             "C:\\Program Files\\Streamlink\\ffmpeg\\ffmpeg.exe",
@@ -73,7 +73,7 @@ def loop_ffmpeg(streamer):
                             r,
                             "-c",
                             "copy",
-                            "processed\\" + r.split("\\")[1],
+                            r.split("\\")[1],
                         ],
                     )
                     try:
@@ -84,16 +84,15 @@ def loop_ffmpeg(streamer):
 
 
 def main():
-    if os.path.isdir("recorded/") is False:
-        os.makedirs("recorded/")
-    if os.path.isdir("processed\\") is False:
-        os.makedirs("processed\\")
+    if os.path.isdir("downloading\\") is False:
+        os.makedirs("downloading\\")
 
     print(
         "The default streamer is namin1004, if you want to change it please input another streamer name. Otherwise, press Enter to continue.\n \n默認直播主是 namin1004，如果要更改它，請輸入另一個直播主的名稱。否則，按 Enter 繼續"
     )
     streamer = str(input("Enter streamer: ") or "namin1004")
     clear()
+    print(f"Streamer: {streamer} 直播主為: {streamer}\n")
     token = input("Your token 輸入Token (覺得麻煩的話可以不用輸入): ")
     clear()
     Process(
