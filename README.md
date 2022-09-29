@@ -29,11 +29,11 @@ This exe allows you to record twitch streams live to .mp4 files.
 
 >步驟 7) 例子: `Your token: oauth:1234565ep62w5yyh108d52juqq0euul`
 
->注: 第一次會自動生成`processing`資料夾
+>注: 第一次會自動生成`downloading`資料夾
 
 程式會持續顯示出`namin1004 doesn't streaming now`來稽查namin有沒有開播
 
-金主播下播後然後等程式回到`namin1004 doesn't streaming now`, .mp4檔會在processed資料夾出現
+金主播下播後然後等程式回到`namin1004 doesn't streaming now`, .mp4檔會出現在你的程式的資料夾
 
 >注: 當金主播下播後程式會繼續運行24/7，如果不想佔用網絡跟電腦資訊請關閉程式
 
