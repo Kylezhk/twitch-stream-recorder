@@ -80,5 +80,11 @@ __pycache__
 /dist 
 /build 
 *.spec
-twitch-recorder.exe
 old.py
+ui.py
+main.ui
+*.mp4
+*.ts
+*.lock
+Pipfile
+token
