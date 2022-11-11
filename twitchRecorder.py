@@ -6,6 +6,7 @@ import threading
 import time
 
 status = ["checking", "downloading", "converting"]
+import pyperclip
 
 
 class Recorder:
@@ -79,7 +80,7 @@ class Recorder:
 if __name__ == "__main__":
     name = (
         input(
-            "The default streamer is namin1004,\nif you want to change it please input another streamer name.\nOtherwise, press Enter to continue: \n\n"
+            "The default streamer is Namin,\nif you want to change it please input another streamer name.\nOtherwise, press Enter to continue: \n\nStreamer: "
         )
         or "namin1004"
     )
@@ -90,7 +91,12 @@ if __name__ == "__main__":
             token = t.read()
     else:
         os.system("cls")
-        token = input("Please enter the token: \n\n")
+        pyperclip.copy(
+            'document.cookie.split("; ").find(item=>item.startsWith("auth-token="))?.split("=")[1]'
+        )
+        token = input(
+            "The get token code has been copied.\nYou may go to Twitch page and login,\nthen press F12 and CTRL+V in the console page. It shows the token. \n\nToken: "
+        )
         if token.startswith('"'):
             token = token[1:-1]
         if token:
