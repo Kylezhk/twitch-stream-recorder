@@ -76,11 +76,22 @@ class Recorder:
         self.current = status[0]
 
 
-def get_token():
+if __name__ == "__main__":
+    name = (
+        input(
+            "The default streamer is Namin,\nif you want to change it please input another streamer name.\nOtherwise, press Enter to continue: \n\nExample 1: https://www.twitch.tv/namin1004\nExample 2: teenggg__\n\nStreamer: "
+        )
+        or "namin1004"
+    )
+    if name.startswith("https"):
+        name = name.split("/")[-1]
+
+    os.system("cls")
     if os.path.exists("token"):
         with open("token", "r") as t:
             token = t.read()
     else:
+
         pyperclip.copy(
             'document.cookie.split("; ").find(item=>item.startsWith("auth-token="))?.split("=")[1]'
         )
@@ -92,24 +103,5 @@ def get_token():
         if token:
             with open("token", "w") as t:
                 t.write(token)
-    return token
-
-
-def get_name():
-    name = (
-        input(
-            "The default streamer is Namin,\nif you want to change it please input another streamer name.\nOtherwise, press Enter to continue: \n\nExample 1: https://www.twitch.tv/namin1004\nExample 2: teenggg__\n\nStreamer: "
-        )
-        or "namin1004"
-    )
-    if name.startswith("https"):
-        name = name.split("/")[-1]
-    return name
-
-
-if __name__ == "__main__":
-    name = get_name()
-    os.system("cls")
-    token = get_token()
     os.system("cls")
     recorder = Recorder(name, token)
