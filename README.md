@@ -67,7 +67,7 @@ Once you see the .mp4 file in your folder which means finish downlaod. .ts file 
 ### 拿你自己的Token
 1) 在圖奇網站按 F12
 
-2）然後轉到console頁面
+2) 然後轉到console頁面
 ![console](console.png)
 
 3) 輸入：`document.cookie.split("; ").find(item=>item.startsWith("auth-token="))?.split("=")[1]` 然後按Enter
