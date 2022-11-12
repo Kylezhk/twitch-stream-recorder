@@ -83,7 +83,7 @@ class Recorder:
 def get_name():
     name = (
         input(
-            "The default streamer is Namin,\nif you want to change it please input another streamer name.\nOtherwise, press Enter to continue: \n\nExample 1: https://www.twitch.tv/namin1004\nExample 2: teenggg__\n\nStreamer: "
+            "Default streamer is Namin,\nIf you want to change it please input another streamer name below.\nOtherwise, press Enter to continue: \n\nExample 1: https://www.twitch.tv/namin1004\nExample 2: teenggg__\n\nStreamer: "
         )
         or "namin1004"
     )
@@ -95,13 +95,19 @@ def get_name():
 def get_token():
     if os.path.exists("token"):
         with open("token", "r") as t:
-            token = t.read()
+            old_token = t.read()
+        token = (
+            input(
+                f"Your old Token: {old_token}\n\nIf you dont want to change please press Enter\n\nOtherwise type the new token here:"
+            )
+            or old_token
+        )
     else:
         pyperclip.copy(
             'document.cookie.split("; ").find(item=>item.startsWith("auth-token="))?.split("=")[1]'
         )
         token = input(
-            'The get token code has been copied.\nYou may go to Twitch page and login,\nthen press F12 and CTRL+V in the console page. It shows the token.\n\nExample 1: "pugqq9cz5weasr76c2ddd1234k3vvq"\nExample 2: pugqq9cz5weasr76c2ddd1234k3vvq  \n\nToken: '
+            f"""The get token code has been copied.\nYou may go to Twitch page and login,\nthen press F12 and CTRL+V in the console page. It shows the token.\n\nExample 1: "pugqq9cz5weasr76c2ddd1234k3vvq"\nExample 2: 'pugqq9cz5weasr76c2ddd1234k3vvq'\nExample 3: pugqq9cz5weasr76c2ddd1234k3vvq\n\nToken: """
         )
         if token.startswith('"'):
             token = token[1:-1]
