@@ -47,6 +47,10 @@ class Recorder:
                 "--quiet",
                 "--hls-playlist-reload-attempts",
                 "1",
+                "--stream-timeout",
+                "5",
+                "--stream-segment-timeout",
+                "5",
                 "--twitch-disable-reruns",
                 "--twitch-low-latency",
                 f"--twitch-api-header=Authorization=OAuth {self.token}",
@@ -100,6 +104,8 @@ def get_token():
             'The get token code has been copied.\nYou may go to Twitch page and login,\nthen press F12 and CTRL+V in the console page. It shows the token.\n\nExample 1: "pugqq9cz5weasr76c2ddd1234k3vvq"\nExample 2: pugqq9cz5weasr76c2ddd1234k3vvq  \n\nToken: '
         )
         if token.startswith('"'):
+            token = token[1:-1]
+        elif token.startswith("'"):
             token = token[1:-1]
         if token:
             with open("token", "w") as t:
