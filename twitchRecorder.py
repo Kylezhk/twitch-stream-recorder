@@ -98,7 +98,7 @@ def get_token():
             old_token = t.read()
         token = (
             input(
-                f"Your old Token: {old_token}\n\nIf you dont want to change please press Enter\n\nOtherwise type the new token here:"
+                f"Your old Token: {old_token}\n\nIf you dont want to change please press Enter\n\nOtherwise type the new token here: "
             )
             or old_token
         )
