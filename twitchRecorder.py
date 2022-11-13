@@ -14,11 +14,40 @@ class Recorder:
         self.streamer = streamer
         self.current = status[0]
         self.token = token
-        self.loop()
+        self.offine = True
+
+        threading.Thread(target=self.check_loop).start()
+        threading.Thread(target=self.downlaod_loop).start()
+
+    def check_loop(self):
+        while True:
+            if self.current != status[1]:
+                raw = subprocess.run(
+                    [
+                        r"C:\Program Files\Streamlink\bin\streamlink.exe",
+                        "-j",
+                        f"twitch.tv/{self.streamer}",
+                        "best",
+                    ],
+                    encoding="utf-8",
+                    stdout=subprocess.PIPE,
+                )
+                result = json.loads(raw.stdout)
+                if "error" not in result:
+                    self.offine = False
+                else:
+                    self.offine = True
+                    print(f"{self.streamer} is offine")
+
+    def downlaod_loop(self):
+        while True:
+            if self.offine == False and self.current != status[1]:
+                self.current = status[1]
+                threading.Thread(target=self.main).start()
+            continue
 
     def loop(self):
         while True:
-            # try:
             raw = subprocess.run(
                 [
                     r"C:\Program Files\Streamlink\bin\streamlink.exe",
@@ -30,16 +59,14 @@ class Recorder:
                 stdout=subprocess.PIPE,
             )
             result = json.loads(raw.stdout)
+            print(result)
             if "error" in result and self.current != status[1]:
                 print(f"{self.streamer} is offine")
             elif self.current != status[1]:
                 threading.Thread(target=self.main).start()
             continue
-        # except KeyboardInterrupt:
-        #     exit()
 
     def main(self):
-        self.current = status[1]
         filename = dt.datetime.now().strftime("%Y%m%d-%H%M")
         subprocess.run(
             [
@@ -116,6 +143,8 @@ def get_token():
         if token:
             with open("token", "w") as t:
                 t.write(token)
+    if token == "":
+        get_token()
     return token
 
 
